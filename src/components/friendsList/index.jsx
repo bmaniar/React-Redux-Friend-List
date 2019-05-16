@@ -1,4 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import FriendsList from './friendsList';
 
-const FriendsListComponent = () => <div />;
-export default FriendsListComponent;
+const mapStateToProps = state => ({
+  friendlist: state.friendlist,
+});
+
+const FriendsListComponent = () => <FriendsList />;
+export default connect(mapStateToProps)(FriendsListComponent);
