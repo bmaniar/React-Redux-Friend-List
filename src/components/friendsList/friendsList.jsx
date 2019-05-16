@@ -21,13 +21,13 @@ const FriendsList = ({
   onAddFriend, onDeleteFriend, friendList, classes,
 }) => {
   const [name, setName] = useState('');
-  const nameChangeHandler = (event) => {
+
+  const onInputKeyPress = (event) => {
     const code = event.keyCode || event.which;
-    if (event.target.value !== '' && code === 13) {
+    if (name !== '' && code === 13) {
       onAddFriend({ name, gender: '', isFavourite: false });
       setName('');
     }
-    setName(event.target.value);
   };
   const deleteClickHandler = id => onDeleteFriend(id);
   return (
@@ -38,7 +38,8 @@ const FriendsList = ({
           className={classes.inputField}
           value={name}
           margin="normal"
-          onKeyUp={event => nameChangeHandler(event)}
+          onKeyPress={onInputKeyPress}
+          onChange={event => setName(event.target.value)}
           fullWidth
         />
       </ListItem>
