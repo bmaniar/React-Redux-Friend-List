@@ -5,6 +5,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = () => ({
@@ -13,7 +15,7 @@ const styles = () => ({
   },
 });
 const FriendsList = ({
-  onAddFriend, onDeleteFriend, friendList, classes,
+  onAddFriend, onDeleteFriend, onSelectFavourite, friendList, classes,
 }) => {
   const [name, setName] = useState('');
 
@@ -28,10 +30,9 @@ const FriendsList = ({
   return (
     <Fragment>
       <TableRow className={classes.root}>
-        <TableCell scope="row">
+        <TableCell scope="row" colSpan={2}>
           <TextField
             id="standard-bare"
-            className={classes.inputField}
             value={name}
             margin="normal"
             onKeyPress={onInputKeyPress}
@@ -46,8 +47,20 @@ const FriendsList = ({
             <TableCell scope="row">
               {friend.name}
             </TableCell>
-            <TableCell>
-              <IconButton aria-label="Comments" onClick={() => deleteClickHandler(friend.id)}>
+            <TableCell align="right">
+              {
+                friend.isFavourite
+                  ? (
+                    <IconButton aria-label="Favourite" onClick={() => onSelectFavourite(friend.id)}>
+                      <StarIcon />
+                    </IconButton>
+                  ) : (
+                    <IconButton aria-label="Favourite" onClick={() => onSelectFavourite(friend.id)}>
+                      <StarBorderIcon />
+                    </IconButton>
+                  )
+              }
+              <IconButton aria-label="Delete" onClick={() => deleteClickHandler(friend.id)}>
                 <DeleteIcon />
               </IconButton>
             </TableCell>
@@ -61,6 +74,7 @@ const FriendsList = ({
 FriendsList.propTypes = {
   onAddFriend: PropTypes.func.isRequired,
   onDeleteFriend: PropTypes.func.isRequired,
+  onSelectFavourite: PropTypes.func.isRequired,
   friendList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

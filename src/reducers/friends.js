@@ -20,6 +20,14 @@ export default function friends(state = initialState, action) {
         ...state,
         friendList: state.friendList.filter(friend => friend.id !== action.id),
       };
+    case types.SELECT_FAVOURITE:
+      return {
+        ...state,
+        friendList: state.friendList.map(
+          friend => (friend.id === action.id ? { ...friend, isFavourite: true }
+            : friend),
+        ),
+      };
     default:
       return state;
   }

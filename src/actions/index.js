@@ -13,3 +13,10 @@ export function onDeleteFriend(id) {
     id,
   };
 }
+
+export function onSelectFavourite(id) {
+  return {
+    type: types.SELECT_FAVOURITE,
+    id,
+  };
+}
