@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import TextField from '@material-ui/core/TextField';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
-    flexGrow: 1,
     overflow: 'hidden',
-    maxWidth: 360,
-    padding: `0 ${theme.spacing.unit * 3}px`,
   },
 });
 const FriendsList = ({
@@ -31,31 +26,35 @@ const FriendsList = ({
   };
   const deleteClickHandler = id => onDeleteFriend(id);
   return (
-    <List className={classes.root}>
-      <ListItem>
-        <TextField
-          id="standard-bare"
-          className={classes.inputField}
-          value={name}
-          margin="normal"
-          onKeyPress={onInputKeyPress}
-          onChange={event => setName(event.target.value)}
-          fullWidth
-        />
-      </ListItem>
+    <Fragment>
+      <TableRow className={classes.root}>
+        <TableCell scope="row">
+          <TextField
+            id="standard-bare"
+            className={classes.inputField}
+            value={name}
+            margin="normal"
+            onKeyPress={onInputKeyPress}
+            onChange={event => setName(event.target.value)}
+            fullWidth
+          />
+        </TableCell>
+      </TableRow>
       {
         friendList.map(friend => (
-          <ListItem key={friend.id}>
-            <ListItemText primary={friend.name} />
-            <ListItemSecondaryAction>
+          <TableRow key={friend.id}>
+            <TableCell scope="row">
+              {friend.name}
+            </TableCell>
+            <TableCell>
               <IconButton aria-label="Comments" onClick={() => deleteClickHandler(friend.id)}>
                 <DeleteIcon />
               </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+            </TableCell>
+          </TableRow>
         ))
       }
-    </List>
+    </Fragment>
   );
 };
 
