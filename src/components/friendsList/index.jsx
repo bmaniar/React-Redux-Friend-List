@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import TablePagination from '@material-ui/core/TablePagination';
 import Table from '@material-ui/core/Table';
@@ -19,10 +20,7 @@ const mapStateToProps = state => ({
   friendList: state.friendList,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onAddFriend: friend => dispatch(FriendsActions.addFriend(friend)),
-  onDeleteFriend: id => dispatch(FriendsActions.deleteFriend(id)),
-});
+const mapDispatchToProps = dispatch => bindActionCreators(FriendsActions, dispatch);
 
 const styles = () => ({
   root: {
