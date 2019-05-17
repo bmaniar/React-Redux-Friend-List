@@ -70,25 +70,30 @@ const FriendsListComponent = ({
           onDeleteFriend={onDeleteFriend}
         />
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TablePagination
-            count={friendList.length}
-            backIconButtonProps={{
-              'aria-label': 'Previous Page',
-              onClick: loadPreviousPage,
-            }}
-            nextIconButtonProps={{
-              'aria-label': 'Next Page',
-              onClick: loadNextPage,
-            }}
-            rowsPerPage={2}
-            rowsPerPageOptions={[]}
-            page={page}
-            onChangePage={handleChangePage}
-          />
-        </TableRow>
-      </TableFooter>
+      {
+        friendList.length > 2
+          ? (
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  count={friendList.length}
+                  backIconButtonProps={{
+                    'aria-label': 'Previous Page',
+                    onClick: loadPreviousPage,
+                  }}
+                  nextIconButtonProps={{
+                    'aria-label': 'Next Page',
+                    onClick: loadNextPage,
+                  }}
+                  rowsPerPage={2}
+                  rowsPerPageOptions={[]}
+                  page={page}
+                  onChangePage={handleChangePage}
+                />
+              </TableRow>
+            </TableFooter>
+          ) : null
+      }
     </Table>
   );
 };
