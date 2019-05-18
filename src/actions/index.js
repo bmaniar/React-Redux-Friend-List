@@ -20,3 +20,10 @@ export function onSelectFavourite(id) {
     id,
   };
 }
+
+export function onDeselectFavourite(id) {
+  return {
+    type: types.DESELECT_FAVOURITE,
+    id,
+  };
+}

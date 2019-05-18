@@ -40,7 +40,7 @@ const styles = () => ({
 });
 
 const FriendsListComponent = ({
-  onAddFriend, onDeleteFriend, onSelectFavourite, friendList, classes,
+  onAddFriend, onDeleteFriend, onSelectFavourite, onDeselectFavourite, friendList, classes,
 }) => {
   const [page, setPage] = useState(0);
   const visibleFriendList = friendList.slice(page * 2, page * 2 + 2);
@@ -67,6 +67,7 @@ const FriendsListComponent = ({
           friendList={visibleFriendList}
           onDeleteFriend={onDeleteFriend}
           onSelectFavourite={onSelectFavourite}
+          onDeselectFavourite={onDeselectFavourite}
         />
       </TableBody>
       {
@@ -101,6 +102,7 @@ FriendsListComponent.propTypes = {
   onAddFriend: PropTypes.func.isRequired,
   onDeleteFriend: PropTypes.func.isRequired,
   onSelectFavourite: PropTypes.func.isRequired,
+  onDeselectFavourite: PropTypes.func.isRequired,
   friendList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

@@ -28,6 +28,14 @@ export default function friends(state = initialState, action) {
             : friend),
         ),
       };
+    case types.DESELECT_FAVOURITE:
+      return {
+        ...state,
+        friendList: state.friendList.map(
+          friend => (friend.id === action.id ? { ...friend, isFavourite: false }
+            : friend),
+        ),
+      };
     default:
       return state;
   }

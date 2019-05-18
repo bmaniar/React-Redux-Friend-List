@@ -15,7 +15,7 @@ const styles = () => ({
   },
 });
 const FriendsList = ({
-  onAddFriend, onDeleteFriend, onSelectFavourite, friendList, classes,
+  onAddFriend, onDeleteFriend, onSelectFavourite, onDeselectFavourite, friendList, classes,
 }) => {
   const [name, setName] = useState('');
 
@@ -51,7 +51,7 @@ const FriendsList = ({
               {
                 friend.isFavourite
                   ? (
-                    <IconButton aria-label="Favourite" onClick={() => onSelectFavourite(friend.id)}>
+                    <IconButton aria-label="Favourite" onClick={() => onDeselectFavourite(friend.id)}>
                       <StarIcon />
                     </IconButton>
                   ) : (
@@ -75,6 +75,7 @@ FriendsList.propTypes = {
   onAddFriend: PropTypes.func.isRequired,
   onDeleteFriend: PropTypes.func.isRequired,
   onSelectFavourite: PropTypes.func.isRequired,
+  onDeselectFavourite: PropTypes.func.isRequired,
   friendList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
