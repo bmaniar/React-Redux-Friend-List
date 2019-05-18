@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TablePagination from '@material-ui/core/TablePagination';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
+import Grid from '@material-ui/core/Grid';
 import TableBody from '@material-ui/core/TableBody';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
@@ -24,9 +25,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(FriendsActions, dispat
 
 const styles = () => ({
   root: {
-    left: '50%',
-    position: 'absolute',
-    transform: 'translateX(-50%)',
     overflow: 'hidden',
     maxWidth: 400,
   },
@@ -53,48 +51,56 @@ const FriendsListComponent = ({
     setPage(page + 1);
   };
   return (
-    <Table className={classes.root}>
-      <TableHead className={classes.header}>
-        <TableRow>
-          <TableCell colSpan={2}>
-            <Typography variant="h6" className={classes.headingText}>The FriendList</Typography>
-          </TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        <FriendsList
-          onAddFriend={onAddFriend}
-          friendList={visibleFriendList}
-          onDeleteFriend={onDeleteFriend}
-          onSelectFavourite={onSelectFavourite}
-          onDeselectFavourite={onDeselectFavourite}
-        />
-      </TableBody>
-      {
-        friendList.length > 2
-          ? (
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  count={friendList.length}
-                  backIconButtonProps={{
-                    'aria-label': 'Previous Page',
-                    onClick: loadPreviousPage,
-                  }}
-                  nextIconButtonProps={{
-                    'aria-label': 'Next Page',
-                    onClick: loadNextPage,
-                  }}
-                  rowsPerPage={2}
-                  rowsPerPageOptions={[]}
-                  page={page}
-                  onChangePage={handleChangePage}
-                />
-              </TableRow>
-            </TableFooter>
-          ) : null
-      }
-    </Table>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      xs={12}
+    >
+      <Table className={classes.root}>
+        <TableHead className={classes.header}>
+          <TableRow>
+            <TableCell colSpan={2}>
+              <Typography variant="h6" className={classes.headingText}>The FriendList</Typography>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <FriendsList
+            onAddFriend={onAddFriend}
+            friendList={visibleFriendList}
+            onDeleteFriend={onDeleteFriend}
+            onSelectFavourite={onSelectFavourite}
+            onDeselectFavourite={onDeselectFavourite}
+          />
+        </TableBody>
+        {
+          friendList.length > 2
+            ? (
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    count={friendList.length}
+                    backIconButtonProps={{
+                      'aria-label': 'Previous Page',
+                      onClick: loadPreviousPage,
+                    }}
+                    nextIconButtonProps={{
+                      'aria-label': 'Next Page',
+                      onClick: loadNextPage,
+                    }}
+                    rowsPerPage={2}
+                    rowsPerPageOptions={[]}
+                    page={page}
+                    onChangePage={handleChangePage}
+                  />
+                </TableRow>
+              </TableFooter>
+            ) : null
+        }
+      </Table>
+    </Grid>
   );
 };
 
